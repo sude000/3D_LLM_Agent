@@ -1,0 +1,26 @@
+# Unity temporary folders
+/[Uu]nity[Cc]lient/[Ll]ibrary/
+/[Uu]nity[Cc]lient/[Tt]emp/
+/[Uu]nity[Cc]lient/[Oo]bj/
+/[Uu]nity[Cc]lient/[Bb]uild/
+/[Uu]nity[Cc]lient/[Bb]uilds/
+/[Uu]nity[Cc]lient/[Ll]ogs/
+/[Uu]nity[Cc]lient/[Uu]ser[Ss]ettings/
+/[Uu]nity[Cc]lient/[Mm]emoryCaptures/
+
+# Visual Studio & VS Code temporary files
+.vs/
+.vscode/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+env/
