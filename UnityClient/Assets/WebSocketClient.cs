@@ -18,6 +18,7 @@ public class WebSocketClient : MonoBehaviour
     public GameObject targetCube; // Unity editöründen hareket ettirilecek Küp
 
     private bool isReconnecting = false;
+    private bool isQuitting = false;
 
     async void Start()
     {
@@ -26,6 +27,8 @@ public class WebSocketClient : MonoBehaviour
 
     async Task ConnectToWebSocket()
     {
+        if (isQuitting) return;
+
         websocket = new WebSocket("ws://localhost:8080");
 
         websocket.OnOpen += () =>
@@ -41,8 +44,11 @@ public class WebSocketClient : MonoBehaviour
 
         websocket.OnClose += (e) =>
         {
-            Debug.LogWarning("[Unity] WebSocket Baðlantýsý Koptu. Yeniden baðlanýlmaya çalýþýlýyor...");
-            TryReconnect();
+            if (!isQuitting)
+            {
+                Debug.LogWarning("[Unity] WebSocket Baðlantýsý Koptu. Yeniden baðlanýlmaya çalýþýlýyor...");
+                TryReconnect();
+            }
         };
 
         websocket.OnMessage += (bytes) =>
@@ -72,11 +78,17 @@ public class WebSocketClient : MonoBehaviour
             {
                 if (targetCube != null && command.pos.Length == 3)
                 {
-                    Vector3 newPos = new Vector3(command.pos[0], command.pos[1], command.pos[2]);
-                    targetCube.transform.position = newPos;
-                    Debug.Log($"[Unity] {command.target} objesi {newPos} konumuna taþýndý.");
+                    // 1. Önce Gemini'den gelen delta/ofset deðerini alýyoruz
+                    Vector3 offset = new Vector3(command.pos[0], command.pos[1], command.pos[2]);
 
-                    SendMessageToPython($"{{\"status\": \"success\", \"moved\": \"{command.target}\"}}");
+                    // 2. Küpün MEVCUT konumuna bu ofseti ekliyoruz (Göreli Hareket)
+                    targetCube.transform.position += offset;
+
+                    Vector3 updatedPos = targetCube.transform.position;
+                    Debug.Log($"[Unity] {command.target} objesi {offset} miktar kaydýrýldý. Yeni Güncel Konum: {updatedPos}");
+
+                    // 3. Python'a yeni güncel konumu bildiriyoruz
+                    SendMessageToPython($"{{\"status\": \"success\", \"moved\": \"{command.target}\", \"current_pos\": [{updatedPos.x}, {updatedPos.y}, {updatedPos.z}]}}");
                 }
             }
         }
@@ -88,7 +100,7 @@ public class WebSocketClient : MonoBehaviour
 
     public async void SendMessageToPython(string message)
     {
-        if (websocket.State == WebSocketState.Open)
+        if (websocket != null && websocket.State == WebSocketState.Open)
         {
             await websocket.SendText(message);
         }
@@ -96,22 +108,38 @@ public class WebSocketClient : MonoBehaviour
 
     private async void TryReconnect()
     {
-        if (isReconnecting) return;
+        if (isReconnecting || isQuitting) return;
         isReconnecting = true;
 
-        while (websocket == null || websocket.State != WebSocketState.Open)
+        while (!isQuitting && (websocket == null || websocket.State != WebSocketState.Open))
         {
             Debug.Log("[Unity] 3 saniye sonra tekrar baðlanýlacak...");
             await Task.Delay(3000);
+            if (isQuitting) break;
             await ConnectToWebSocket();
         }
     }
 
-    private async void OnApplicationQuit()
+    private async Task CloseWebSocket()
     {
+        isQuitting = true;
         if (websocket != null)
         {
-            await websocket.Close();
+            if (websocket.State == WebSocketState.Open)
+            {
+                await websocket.Close();
+            }
+            websocket = null;
         }
+    }
+
+    private async void OnDisable()
+    {
+        await CloseWebSocket();
+    }
+
+    private async void OnApplicationQuit()
+    {
+        await CloseWebSocket();
     }
 }
