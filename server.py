@@ -7,7 +7,8 @@ from google.genai import types
 # ---------------------------------------------------------
 # KONFİGÜRASYON VE GEMINI CLIENT KURULUMU
 # ---------------------------------------------------------
-GEMINI_API_KEY = "AQ.Ab8RN6KyXyJ8MHCj_AYTeI48eIPDVvGVeIDyMNM_l67EZPTI7Q"
+# API Key'i kodun içinden kaldırıyoruz
+GEMINI_API_KEY = "BURAYA_GEMINI_API_KEY_YAZIN"
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
