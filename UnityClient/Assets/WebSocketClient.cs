@@ -1,21 +1,44 @@
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using UnityEngine;
 using NativeWebSocket;
 
 [System.Serializable]
-public class CommandData
+public class SingleCommand
 {
     public string action;
     public string target;
     public float[] pos;
 }
 
+[System.Serializable]
+public class MultiCommandData
+{
+    public List<SingleCommand> actions = new List<SingleCommand>();
+}
+
+[System.Serializable]
+public class ObjectState
+{
+    public string name;
+    public float[] position;
+}
+
+[System.Serializable]
+public class SceneStateData
+{
+    public string type = "scene_state";
+    public List<ObjectState> objects = new List<ObjectState>();
+}
+
 public class WebSocketClient : MonoBehaviour
 {
     private WebSocket websocket;
-    public GameObject targetCube; // Unity editöründen hareket ettirilecek Küp
+
+    [Header("Etkileþimli Nesneler Listesi")]
+    public List<GameObject> interactiveObjects = new List<GameObject>();
 
     private bool isReconnecting = false;
     private bool isQuitting = false;
@@ -35,6 +58,7 @@ public class WebSocketClient : MonoBehaviour
         {
             Debug.Log("[Unity] WebSocket Baðlantýsý Baþarýlý!");
             isReconnecting = false;
+            SendSceneStateToPython();
         };
 
         websocket.OnError += (e) =>
@@ -68,28 +92,63 @@ public class WebSocketClient : MonoBehaviour
 #endif
     }
 
+    public string GetSceneStateJson()
+    {
+        SceneStateData stateData = new SceneStateData();
+
+        foreach (GameObject obj in interactiveObjects)
+        {
+            if (obj != null)
+            {
+                ObjectState state = new ObjectState();
+                state.name = obj.name.ToLower();
+                Vector3 pos = obj.transform.position;
+                state.position = new float[] { pos.x, pos.y, pos.z };
+                stateData.objects.Add(state);
+            }
+        }
+
+        return JsonUtility.ToJson(stateData);
+    }
+
+    public async void SendSceneStateToPython()
+    {
+        string jsonState = GetSceneStateJson();
+        await SendMessageToPython(jsonState);
+        Debug.Log("[Unity] Güncel Sahne Durumu Python'a Gönderildi: " + jsonState);
+    }
+
     private void ProcessMessage(string jsonMessage)
     {
         try
         {
-            CommandData command = JsonUtility.FromJson<CommandData>(jsonMessage);
+            MultiCommandData multiCommand = JsonUtility.FromJson<MultiCommandData>(jsonMessage);
 
-            if (command != null && command.action == "move")
+            if (multiCommand != null && multiCommand.actions != null && multiCommand.actions.Count > 0)
             {
-                if (targetCube != null && command.pos.Length == 3)
+                foreach (SingleCommand command in multiCommand.actions)
                 {
-                    // 1. Önce Gemini'den gelen delta/ofset deðerini alýyoruz
-                    Vector3 offset = new Vector3(command.pos[0], command.pos[1], command.pos[2]);
+                    if (command.action == "move")
+                    {
+                        GameObject targetObj = interactiveObjects.Find(o => o.name.ToLower() == command.target.ToLower());
 
-                    // 2. Küpün MEVCUT konumuna bu ofseti ekliyoruz (Göreli Hareket)
-                    targetCube.transform.position += offset;
+                        if (targetObj != null && command.pos.Length == 3)
+                        {
+                            Vector3 offset = new Vector3(command.pos[0], command.pos[1], command.pos[2]);
+                            targetObj.transform.position += offset;
 
-                    Vector3 updatedPos = targetCube.transform.position;
-                    Debug.Log($"[Unity] {command.target} objesi {offset} miktar kaydýrýldý. Yeni Güncel Konum: {updatedPos}");
-
-                    // 3. Python'a yeni güncel konumu bildiriyoruz
-                    SendMessageToPython($"{{\"status\": \"success\", \"moved\": \"{command.target}\", \"current_pos\": [{updatedPos.x}, {updatedPos.y}, {updatedPos.z}]}}");
+                            Vector3 updatedPos = targetObj.transform.position;
+                            Debug.Log($"[Unity] {command.target} objesi {offset} miktar kaydýrýldý. Yeni Güncel Konum: {updatedPos}");
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"[Unity] Target obje bulunamadý veya pos hatalý: {command.target}");
+                        }
+                    }
                 }
+
+                // Tüm eylemler tamamlandýktan sonra güncel sahne durumunu Python'a bildir
+                SendSceneStateToPython();
             }
         }
         catch (Exception ex)
@@ -98,7 +157,7 @@ public class WebSocketClient : MonoBehaviour
         }
     }
 
-    public async void SendMessageToPython(string message)
+    public async Task SendMessageToPython(string message)
     {
         if (websocket != null && websocket.State == WebSocketState.Open)
         {
@@ -133,13 +192,6 @@ public class WebSocketClient : MonoBehaviour
         }
     }
 
-    private async void OnDisable()
-    {
-        await CloseWebSocket();
-    }
-
-    private async void OnApplicationQuit()
-    {
-        await CloseWebSocket();
-    }
+    private async void OnDisable() => await CloseWebSocket();
+    private async void OnApplicationQuit() => await CloseWebSocket();
 }

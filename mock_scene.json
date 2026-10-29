@@ -1,0 +1,16 @@
+{
+  "objects": [
+    {
+      "name": "cube",
+      "position": [0.0, 0.0, 0.0]
+    },
+    {
+      "name": "sphere",
+      "position": [3.0, 0.0, 0.0]
+    },
+    {
+      "name": "cylinder",
+      "position": [-3.0, 0.0, 0.0]
+    }
+  ]
+}
