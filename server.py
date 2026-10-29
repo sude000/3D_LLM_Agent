@@ -8,15 +8,16 @@ from google.genai import types
 # ---------------------------------------------------------
 # KONFİGÜRASYON VE GEMINI CLIENT KURULUMU
 # ---------------------------------------------------------
-GEMINI_API_KEY = "BURAYA_GEMINI_API_KEY_YAZIN"  # Google AI Studio API Key'inizi yazın
+GEMINI_API_KEY = "BURAYA_GEMINI_API_KEY_YAZIN"  # API Key'inizi buraya yapıştırın
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 HOST = "localhost"
 PORT = 8080
 
-# Sahne Durumu Belleği (Varsayılan olarak Mock dosyadan okur)
+# Canlı Sahne Belleği ve Diyalog Geçmişi Belleği
 CURRENT_SCENE_STATE = {"objects": []}
+CHAT_HISTORY = []  # Diyalog takibi için basit bellek
 
 def load_mock_scene():
     """Unity bağlı değilse yedek mock_scene.json dosyasını yükler."""
@@ -27,18 +28,19 @@ def load_mock_scene():
             print("[Python Mock Engine] mock_scene.json başarıyla yüklendi.")
 
 def build_system_instruction():
-    """Sahnedeki canlı nesnelere göre dynamic prompt oluşturur."""
+    """Sahnedeki canlı nesnelere göre dynamic system prompt oluşturur."""
     objects_summary = json.dumps(CURRENT_SCENE_STATE.get("objects", []), ensure_ascii=False)
     
     return f"""
-Sen 3B bir sanal ortamda nesneleri yöneten bir yapay zeka ajanısın.
+Sen 3B bir sanal ortamda nesneleri yöneten akıllı bir yapay zeka ajanısın.
 Şu anki sahnede bulunan nesneler ve mevcut konumları şunlardır:
 {objects_summary}
 
-Kullanıcının vereceği Türkçe doğal dil komutlarını ANCAK VE SADECE aşağıdaki JSON formatına dönüştüreceksin.
+Kullanıcının Türkçe doğal dil komutlarını analiz et ve SADECE aşağıdaki 3 JSON formatından BİRİNİ üret:
 
-Beklenen JSON Formatı:
+1. EĞER KOMUT NET VE UYGULANABİLİMSE:
 {{
+  "type": "action",
   "actions": [
     {{
       "action": "move",
@@ -48,35 +50,52 @@ Beklenen JSON Formatı:
   ]
 }}
 
-KURALLAR VE ÖNEMLİ MATEMATİKSEL TALİMATLAR:
-1. "actions" alanı her zaman bir liste (array) olmalıdır. Kullanıcı tek bir hareket istese bile 1 elemanlı bir liste üret.
-2. Kullanıcı aynı cümlede birden fazla nesne hareketi isterse (örn: "Küreyi sağa, silindiri yukarı kaydır"), hepsini "actions" listesinin içine sırayla ekle.
-3. "pos" alanı mutlak bir koordinat DEĞİLDİR. Mevcut konuma eklenecek OFSET/KAYDIRMA vektörüdür [dx, dy, dz].
-4. ASLA nesnenin mevcut konumunu hesaplayıp yeni mutlak koordinatı yazma. Sadece hareket miktarını yaz.
-5. Yön Kuralları:
-   - "sağa" -> [+x, 0, 0] (Örn: 5 birim sağa -> [5, 0, 0])
-   - "sola" -> [-x, 0, 0] (Örn: 5 birim sola -> [-5, 0, 0])
-   - "yukarı / havaya" -> [0, +y, 0]
-   - "aşağı" -> [0, -y, 0]
-   - "ileri" -> [0, 0, +z] (Örn: 5 birim ileri -> [0, 0, 5])
-   - "geri" -> [0, 0, -z]
-6. "target" alanı sahnede bulunan nesnelerden biri olmalıdır (örn: "cube", "sphere", "cylinder").
-7. Kullanıcı miktar belirtmediyse varsayılan adımı 2 birim al.
-8. Yanıtında JSON dışında HİÇBİR açıklama veya markdown yazısı yazma.
+2. EĞER KOMUT EKSİK VEYA BELİRSİZSE (Hangi nesne olduğu net değilse veya hedef belirsizse):
+{{
+  "type": "ask_user",
+  "question": "Kullanıcıya sorulacak netleştirme sorusu"
+}}
+
+3. EĞER KOMUT UYGULANAMAZ VEYA İMKANSIZSA (Sahnede olmayan nesne, fizik dışı komut vb.):
+{{
+  "type": "reject_command",
+  "reason": "Reddetme gerekçesi"
+}}
+
+KURALLAR:
+- Sahnede olmayan nesneler için ASLA "action" üretme, "reject_command" döndür.
+- Hangi nesnenin kastedildiği belirsizse ("nesneyi kaldır", "onu sağa kaydır") "ask_user" üret.
+- Yanıtında JSON dışında HİÇBİR açıklama veya markdown yazısı yazma.
+- "pos" mutlak koordinat değil, ofset [dx, dy, dz] değeridir.
 """
 
 def ask_gemini(user_prompt: str) -> str:
-    """Kullanıcının metin komutunu ve canlı sahne durumunu Gemini API'ye gönderir."""
+    """Kullanıcının metin komutunu, geçmiş konuşmayı ve canlı sahne durumunu Gemini API'ye gönderir."""
+    global CHAT_HISTORY
     try:
         dynamic_instruction = build_system_instruction()
+        
+        # Diyalog geçmişini de modele aktarmak için paketliyoruz
+        contents = []
+        for turn in CHAT_HISTORY:
+            contents.append(turn)
+        contents.append(user_prompt)
+
         response = client.models.generate_content(
             model='gemini-3.8-flash',
-            contents=user_prompt,
+            contents=contents,
             config=types.GenerateContentConfig(
                 system_instruction=dynamic_instruction,
                 response_mime_type="application/json"
             ),
         )
+        
+        # Başarılı yanıtta geçmişe ekle (Son 6 turu tut)
+        CHAT_HISTORY.append(f"Kullanıcı: {user_prompt}")
+        CHAT_HISTORY.append(f"Ajan Yanıtı: {response.text}")
+        if len(CHAT_HISTORY) > 6:
+            CHAT_HISTORY = CHAT_HISTORY[-6:]
+
         return response.text
     except Exception as e:
         print(f"[Python] Gemini API Hatalı Yanıt Döndü: {e}")
@@ -99,25 +118,47 @@ async def handle_client(websocket):
             if not user_input.strip():
                 continue
 
-            print(f"[Python] Gemini'ye soruluyor (Canlı Sahne Durumu İle)...")
-            json_response = ask_gemini(user_input)
+            print(f"[Python] Gemini'ye soruluyor...")
+            raw_response = ask_gemini(user_input)
             
-            if json_response:
-                print(f"[Python] Gemini'den Gelen JSON Paket: {json_response}")
-                await websocket.send(json_response)
-                
-                # Unity'den güncel sahne durumunun gelmesini bekleme
+            if raw_response:
                 try:
-                    unity_ack = await websocket.recv()
-                    data = json.loads(unity_ack)
-                    if data.get("type") == "scene_state":
-                        CURRENT_SCENE_STATE = data
-                        print(f"[Python] Unity Güncel Sahne Durumu Alındı. Obje Sayısı: {len(CURRENT_SCENE_STATE.get('objects', []))}")
+                    parsed_response = json.loads(raw_response)
+                    res_type = parsed_response.get("type")
+
+                    # DURUM 1: NET HAREKET EYLEMİ
+                    if res_type == "action":
+                        print(f"[Python] Eylem Komutu Üretildi: {raw_response}")
+                        await websocket.send(raw_response)
+                        
+                        # Unity'den güncel sahne durumunun gelmesini bekle
+                        try:
+                            unity_ack = await websocket.recv()
+                            data = json.loads(unity_ack)
+                            if data.get("type") == "scene_state":
+                                CURRENT_SCENE_STATE = data
+                                print(f"[Python] Unity Güncel Sahne Durumu Alındı. Obje Sayısı: {len(CURRENT_SCENE_STATE.get('objects', []))}")
+                        except websockets.exceptions.ConnectionClosed:
+                            print("[Python] Unity bağlantısı kapandı.")
+                            break
+
+                    # DURUM 2: BELİRSİZLİK (Soru Sorma)
+                    elif res_type == "ask_user":
+                        question = parsed_response.get("question", "Lütfen talebinizi netleştirin.")
+                        print(f"\n🤖 [Ajan Soru Soruyor]: {question}")
+                        # Unity'ye veri GÖNDERİLMEZ ve recv() BEKLENMEZ. Doğrudan bir sonraki input() döngüsüne geçilir.
+
+                    # DURUM 3: UYGULANAMAZ / REDDETME
+                    elif res_type == "reject_command":
+                        reason = parsed_response.get("reason", "Bu komut uygulanamaz.")
+                        print(f"\n🚫 [Ajan Komutu Reddetti]: {reason}")
+                        # Unity'ye veri GÖNDERİLMEZ ve recv() BEKLENMEZ.
+
                     else:
-                        print(f"[Python] Unity Geri Bildirimi: {unity_ack}")
-                except websockets.exceptions.ConnectionClosed:
-                    print("[Python] Unity bağlantısı kapandı.")
-                    break
+                        print(f"[Python] Tanımsız yanıt tipi: {raw_response}")
+
+                except json.JSONDecodeError:
+                    print(f"[Python] Hata: LLM geçerli bir JSON üretmedi -> {raw_response}")
             else:
                 print("[Python] Komut işlenemedi.")
 

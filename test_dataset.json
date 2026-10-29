@@ -1,0 +1,126 @@
+{
+  "ambiguous_commands": [
+    {
+      "id": 1,
+      "command": "Nesneyi 3 birim sağa kaydır",
+      "expected_type": "ask_user",
+      "description": "Nesne adı belirtilmemiş (Hangi nesne?)"
+    },
+    {
+      "id": 2,
+      "command": "Küpü hareket ettir",
+      "expected_type": "ask_user",
+      "description": "Yön ve miktar belirtilmemiş"
+    },
+    {
+      "id": 3,
+      "command": "Onu yukarı kaldır",
+      "expected_type": "ask_user",
+      "description": "İşaret zamiri kullanılmış, nesne belirsiz"
+    },
+    {
+      "id": 4,
+      "command": "Kırmızı olanı sağa kaydır",
+      "expected_type": "ask_user",
+      "description": "Sahnede renk bilgisi yoksa veya belirsizse"
+    },
+    {
+      "id": 5,
+      "command": "Silindiri biraz it",
+      "expected_type": "ask_user",
+      "description": "Yön belirtilmemiş"
+    },
+    {
+      "id": 6,
+      "command": "Nesneyi havaya kaldır ve 2 birim sağa kaydır",
+      "expected_type": "ask_user",
+      "description": "Hangi nesnenin kaldırılacağı belirsiz"
+    },
+    {
+      "id": 7,
+      "command": "Şunu biraz geri çek",
+      "expected_type": "ask_user",
+      "description": "Nesne adı belirsiz"
+    },
+    {
+      "id": 8,
+      "command": "Küreyi ve diğer nesneyi 3 birim sola kaydır",
+      "expected_type": "ask_user",
+      "description": "Diğer nesnenin hangisi olduğu belirsiz"
+    },
+    {
+      "id": 9,
+      "command": "Birkaç birim yukarı kaldır",
+      "expected_type": "ask_user",
+      "description": "Hem nesne hem miktar belirsiz"
+    },
+    {
+      "id": 10,
+      "command": "Cismin yerini değiştir",
+      "expected_type": "ask_user",
+      "description": "Ne nesne ne yön ne miktar belli"
+    }
+  ],
+  "invalid_commands": [
+    {
+      "id": 11,
+      "command": "Masayı 2 birim sola it",
+      "expected_type": "reject_command",
+      "description": "Sahnede masa yok"
+    },
+    {
+      "id": 12,
+      "command": "Arabayı çalıştır ve kapıya sür",
+      "expected_type": "reject_command",
+      "description": "Sahnede araba yok"
+    },
+    {
+      "id": 13,
+      "command": "Küpü patlat ve yok et",
+      "expected_type": "reject_command",
+      "description": "Fiziksel olarak desteklenmeyen eylem (patlatma)"
+    },
+    {
+      "id": 14,
+      "command": "Sandaleyi kürenin yanına koy",
+      "expected_type": "reject_command",
+      "description": "Sahnede sandalye yok"
+    },
+    {
+      "id": 15,
+      "command": "Küpü duvarın içine sok",
+      "expected_type": "reject_command",
+      "description": "Geçersiz/imkansız fiziksel eylem"
+    },
+    {
+      "id": 16,
+      "command": "Silindiri uzaya uçur",
+      "expected_type": "reject_command",
+      "description": "Mantıksız/fizik dışı komut"
+    },
+    {
+      "id": 17,
+      "command": "Kırmızı elmayı masaya koy",
+      "expected_type": "reject_command",
+      "description": "Sahnede elma yok"
+    },
+    {
+      "id": 18,
+      "command": "Kutuyu erit",
+      "expected_type": "reject_command",
+      "description": "Desteklenmeyen eylem"
+    },
+    {
+      "id": 19,
+      "command": "Robotu çalıştır",
+      "expected_type": "reject_command",
+      "description": "Sahnede robot yok"
+    },
+    {
+      "id": 20,
+      "command": "Sahnede görünmez ol",
+      "expected_type": "reject_command",
+      "description": "Geçersiz eylem"
+    }
+  ]
+}
