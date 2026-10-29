@@ -23,6 +23,7 @@ public class MultiCommandData
 public class ObjectState
 {
     public string name;
+    public string color; // Dinamik algýlanan renk
     public float[] position;
 }
 
@@ -102,13 +103,49 @@ public class WebSocketClient : MonoBehaviour
             {
                 ObjectState state = new ObjectState();
                 state.name = obj.name.ToLower();
+
+                // --- DÝNAMÝK RENK ALGILAMA BÖLÜMÜ ---
+                state.color = DetectObjectColor(obj);
+
                 Vector3 pos = obj.transform.position;
-                state.position = new float[] { pos.x, pos.y, pos.z };
+                state.position = new float[] { (float)Math.Round(pos.x, 2), (float)Math.Round(pos.y, 2), (float)Math.Round(pos.z, 2) };
                 stateData.objects.Add(state);
             }
         }
 
         return JsonUtility.ToJson(stateData);
+    }
+
+    /// <summary>
+    /// Nesnenin Renderer bileþenindeki Materyal rengini analiz eder ve Türkçe renk adýný döner.
+    /// </summary>
+    private string DetectObjectColor(GameObject obj)
+    {
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer == null || renderer.material == null)
+            return "bilinmiyor";
+
+        // Varsa materyal adýndan renk okuma (Örn: "RedMaterial" -> kýrmýzý)
+        string matName = renderer.material.name.ToLower();
+        if (matName.Contains("red") || matName.Contains("kýrmýzý")) return "kýrmýzý";
+        if (matName.Contains("blue") || matName.Contains("mavi")) return "mavi";
+        if (matName.Contains("green") || matName.Contains("yeþil")) return "yeþil";
+        if (matName.Contains("yellow") || matName.Contains("sarý")) return "sarý";
+        if (matName.Contains("black") || matName.Contains("siyah")) return "siyah";
+        if (matName.Contains("white") || matName.Contains("beyaz")) return "beyaz";
+
+        // Materyal adýnda yoksa RGB deðerlerine bakarak renk tahmini
+        Color c = renderer.material.color;
+
+        // Basit RGB Algýlama Mantýðý
+        if (c.r > 0.6f && c.g < 0.4f && c.b < 0.4f) return "kýrmýzý";
+        if (c.b > 0.6f && c.r < 0.4f && c.g < 0.4f) return "mavi";
+        if (c.g > 0.6f && c.r < 0.4f && c.b < 0.4f) return "yeþil";
+        if (c.r > 0.6f && c.g > 0.6f && c.b < 0.4f) return "sarý";
+        if (c.r < 0.2f && c.g < 0.2f && c.b < 0.2f) return "siyah";
+        if (c.r > 0.8f && c.g > 0.8f && c.b > 0.8f) return "beyaz";
+
+        return "renkli";
     }
 
     public async void SendSceneStateToPython()

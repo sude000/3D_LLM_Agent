@@ -1,16 +1,8 @@
 {
   "objects": [
-    {
-      "name": "cube",
-      "position": [0.0, 0.0, 0.0]
-    },
-    {
-      "name": "sphere",
-      "position": [3.0, 0.0, 0.0]
-    },
-    {
-      "name": "cylinder",
-      "position": [-3.0, 0.0, 0.0]
-    }
+    {"name": "cube", "color": "kırmızı", "position": [0.0, 0.0, 0.0]},
+    {"name": "cube_2", "color": "mavi", "position": [0.0, 0.0, 3.0]},
+    {"name": "sphere", "color": "yeşil", "position": [3.0, 0.0, 0.0]},
+    {"name": "cylinder", "color": "sarı", "position": [-3.0, 0.0, 0.0]}
   ]
 }
