@@ -1,0 +1,1466 @@
+{
+  "model": "gemini-3.8-flash",
+  "summary": {
+    "decision_accuracy": 0.96,
+    "target_entity_accuracy": 1.0,
+    "vector_offset_accuracy": 1.0,
+    "exact_action_match": 1.0,
+    "clarification_semantic_quality": 0.92,
+    "refusal_semantic_quality": 0.96
+  },
+  "logs": [
+    {
+      "id": 1,
+      "command": "Kırmızı küpü 3 birim sağa kaydır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube",
+            "pos": [
+              3.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "command": "Küpü 3 birim sağa kaydır",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['kırmızı', 'mavi', 'hangi', 'iki'])",
+      "matched_keywords": [
+        "kırmızı",
+        "mavi",
+        "hangi",
+        "iki"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Sahnede kırmızı ve mavi olmak üzere iki küp bulunmaktadır. Hangisini sağa kaydırmak istiyorsunuz?"
+      }
+    },
+    {
+      "id": 3,
+      "command": "Masayı 2 birim sola it",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['masa', 'bulunm'])",
+      "matched_keywords": [
+        "masa",
+        "bulunm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede 'masa' adında bir nesne bulunmuyor."
+      }
+    },
+    {
+      "id": 4,
+      "command": "Yeşil küreyi 4 birim sola götür",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "sphere",
+            "pos": [
+              -4.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "command": "Onu yukarı kaldır",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['hangi', 'nesne', 'küp', 'küre'])",
+      "matched_keywords": [
+        "hangi",
+        "nesne",
+        "küp",
+        "küre"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi nesneyi yukarı kaldırmak istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunuyor."
+      }
+    },
+    {
+      "id": 6,
+      "command": "Kırmızı küpü patlat ve yok et",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['patlat', 'yok', 'desteklenm'])",
+      "matched_keywords": [
+        "patlat",
+        "yok",
+        "desteklenm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Nesneleri patlatma veya yok etme işlemi desteklenmemektedir, sadece taşıma komutları uygulanabilir."
+      }
+    },
+    {
+      "id": 7,
+      "command": "Silindiri yukarı kaldır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cylinder",
+            "pos": [
+              0.0,
+              2.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "command": "Küreyi hareket ettir",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['yön', 'hangi'])",
+      "matched_keywords": [
+        "yön",
+        "hangi"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Küreyi hangi yöne hareket ettirmemi istersiniz?"
+      }
+    },
+    {
+      "id": 9,
+      "command": "Siyah küpü 3 birim sağa kaydır",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['siyah', 'bulunm'])",
+      "matched_keywords": [
+        "siyah",
+        "bulunm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede siyah renkli bir küp bulunmamaktadır."
+      }
+    },
+    {
+      "id": 10,
+      "command": "Mavi olanı 4 birim ileri götür",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube_2",
+            "pos": [
+              0.0,
+              0.0,
+              4.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "command": "Nesneyi 2 birim sola kaydır",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['hangi', 'nesne', 'küp', 'küre'])",
+      "matched_keywords": [
+        "hangi",
+        "nesne",
+        "küp",
+        "küre"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi nesneyi sola kaydırmak istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunmaktadır."
+      }
+    },
+    {
+      "id": 12,
+      "command": "Mavi küpü duvarın içine sok",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['duvar', 'desteklenm'])",
+      "matched_keywords": [
+        "duvar",
+        "desteklenm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede bir duvar bulunmamaktadır ve nesnelerin katı yüzeylerin içine sokulması desteklenmemektedir."
+      }
+    },
+    {
+      "id": 13,
+      "command": "Kırmızı küpü 2 birim sağa ve yeşil küreyi 2 birim sola kaydır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube",
+            "pos": [
+              2.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "action": "move",
+            "target": "sphere",
+            "pos": [
+              -2.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "command": "Kırmızı küpü hareket ettir",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['yön', 'hangi'])",
+      "matched_keywords": [
+        "yön",
+        "hangi"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Kırmızı küpü hangi yöne ve ne kadar hareket ettirmemi istersiniz?"
+      }
+    },
+    {
+      "id": 15,
+      "command": "Kürenin rengini turuncu yap",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['renk', 'desteklenm', 'hareket'])",
+      "matched_keywords": [
+        "renk",
+        "desteklenm",
+        "hareket"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Renk değiştirme eylemi desteklenmemektedir, sadece nesne hareket ettirme komutları uygulanabilir."
+      }
+    },
+    {
+      "id": 16,
+      "command": "Sarı silindiri 5 birim ileri it",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cylinder",
+            "pos": [
+              0.0,
+              0.0,
+              5.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "command": "Şunu biraz geri çek",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['hangi', 'nesne'])",
+      "matched_keywords": [
+        "hangi",
+        "nesne"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi nesneyi geri çekmek istiyorsunuz? (Kırmızı küp, mavi küp, yeşil küre veya sarı silindir)"
+      }
+    },
+    {
+      "id": 18,
+      "command": "Arabayı çalıştır ve kapıya sür",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['araba', 'kapı', 'bulunm'])",
+      "matched_keywords": [
+        "araba",
+        "kapı",
+        "bulunm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede araba veya kapı bulunmuyor ve bu eylem desteklenmiyor."
+      }
+    },
+    {
+      "id": 19,
+      "command": "Küreyi 2 birim aşağı indir",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "sphere",
+            "pos": [
+              0.0,
+              -2.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "command": "Birkaç birim sağa kaydır",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['hangi', 'nesne'])",
+      "matched_keywords": [
+        "hangi",
+        "nesne"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi nesneyi sağa kaydırmak istiyorsunuz? (kırmızı küp, mavi küp, yeşil küre veya sarı silindir)"
+      }
+    },
+    {
+      "id": 21,
+      "command": "Mavi küpü ikiye böl",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['böl', 'desteklenm', 'hareket'])",
+      "matched_keywords": [
+        "böl",
+        "desteklenm",
+        "hareket"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Nesneleri bölme veya kesme eylemi desteklenmemektedir; yalnızca taşıma hareketleri yapılabilir."
+      }
+    },
+    {
+      "id": 22,
+      "command": "Şu yeşil şeyi biraz havalandır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "sphere",
+            "pos": [
+              0.0,
+              2.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "command": "Küpü yukarı kaldır",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['kırmızı', 'mavi', 'hangi', 'iki'])",
+      "matched_keywords": [
+        "kırmızı",
+        "mavi",
+        "hangi",
+        "iki"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Sahnede kırmızı ve mavi olmak üzere iki adet küp bulunmaktadır. Hangisini yukarı kaldırmak istiyorsunuz?"
+      }
+    },
+    {
+      "id": 24,
+      "command": "Silindiri uzaya uçur",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['uzay', 'uçur', 'desteklenm'])",
+      "matched_keywords": [
+        "uzay",
+        "uçur",
+        "desteklenm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Nesneleri uzaya uçurma eylemi desteklenmemektedir; yalnızca belirli mesafelerde hareket ettirme (taşıma) komutları uygulanabilir."
+      }
+    },
+    {
+      "id": 25,
+      "command": "Mavi küpü 6 birim geri getir",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube_2",
+            "pos": [
+              0.0,
+              0.0,
+              -6.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "command": "Cismin yerini değiştir",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['hangi', 'nesne', 'yön'])",
+      "matched_keywords": [
+        "hangi",
+        "nesne",
+        "yön"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi nesnenin yerini, hangi yöne veya konuma değiştirmek istiyorsunuz?"
+      }
+    },
+    {
+      "id": 27,
+      "command": "Sandalyeyi kürenin yanına koy",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['sandalye', 'bulunm'])",
+      "matched_keywords": [
+        "sandalye",
+        "bulunm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede 'sandalye' adında bir nesne bulunmuyor."
+      }
+    },
+    {
+      "id": 28,
+      "command": "Sarı olanı 3 birim sola kaydır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cylinder",
+            "pos": [
+              -3.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "command": "Silindiri biraz it",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['yön', 'hangi'])",
+      "matched_keywords": [
+        "yön",
+        "hangi"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Silindiri hangi yöne doğru itmemi istersiniz?"
+      }
+    },
+    {
+      "id": 30,
+      "command": "Kamerayı sahneden sil",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['kamera', 'sil', 'bulunm', 'desteklenm'])",
+      "matched_keywords": [
+        "kamera",
+        "sil",
+        "bulunm",
+        "desteklenm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede 'kamera' adında yönetilebilir bir nesne bulunmamaktadır ve silme işlemi desteklenmemektedir."
+      }
+    },
+    {
+      "id": 31,
+      "command": "Kırmızı olanı 1 birim sağa kaydır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube",
+            "pos": [
+              1.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 32,
+      "command": "Küreyi ve diğer nesneyi 3 birim sola kaydır",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['diğer', 'hangi', 'nesne', 'küp', 'silindir'])",
+      "matched_keywords": [
+        "diğer",
+        "hangi",
+        "nesne",
+        "küp",
+        "silindir"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Küre dışındaki hangi diğer nesneyi (kırmızı küp, mavi küp veya sarı silindir) taşımak istiyorsunuz?"
+      }
+    },
+    {
+      "id": 33,
+      "command": "Mor küreyi yukarı kaldır",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['mor', 'bulunm'])",
+      "matched_keywords": [
+        "mor",
+        "bulunm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede mor renkte bir küre bulunmamaktadır."
+      }
+    },
+    {
+      "id": 34,
+      "command": "Silindiri 3 birim geri çek",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cylinder",
+            "pos": [
+              0.0,
+              0.0,
+              -3.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "command": "Mavi küpü bir yere götür",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['nereye', 'yön', 'hangi'])",
+      "matched_keywords": [
+        "nereye",
+        "yön",
+        "hangi"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Mavi küpü hangi yöne veya nereye taşımak istersiniz?"
+      }
+    },
+    {
+      "id": 36,
+      "command": "Sahnede görünmez ol",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['görünmez', 'desteklenm', 'hareket'])",
+      "matched_keywords": [
+        "görünmez",
+        "desteklenm",
+        "hareket"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Görünmez olma eylemi desteklenmemektedir; yalnızca nesneleri hareket ettirme komutları uygulanabilir."
+      }
+    },
+    {
+      "id": 37,
+      "command": "Küreyi sağa kaydır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "sphere",
+            "pos": [
+              2.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "command": "Küpü 4 birim ileri it",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['kırmızı', 'mavi', 'hangi', 'iki'])",
+      "matched_keywords": [
+        "kırmızı",
+        "mavi",
+        "hangi",
+        "iki"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Sahnede kırmızı ve mavi olmak üzere iki küp var. Hangisini hareket ettirmek istiyorsunuz?"
+      }
+    },
+    {
+      "id": 39,
+      "command": "Kutuyu erit",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['erit', 'desteklenm'])",
+      "matched_keywords": [
+        "erit",
+        "desteklenm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Nesneleri eritme eylemi bu ortamda desteklenmemektedir; sadece taşıma (move) işlemleri yapılabilir."
+      }
+    },
+    {
+      "id": 40,
+      "command": "Mavi küpü havaya 3 birim kaldır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube_2",
+            "pos": [
+              0.0,
+              3.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 41,
+      "command": "Nesneyi havaya kaldır ve sağa kaydır",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['hangi', 'nesne', 'küp', 'küre'])",
+      "matched_keywords": [
+        "hangi",
+        "nesne",
+        "küp",
+        "küre"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi nesneyi hareket ettirmek istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunmaktadır."
+      }
+    },
+    {
+      "id": 42,
+      "command": "Piramidi 2 birim ileri it",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['piramit', 'bulunm'])",
+      "matched_keywords": [
+        "piramit",
+        "bulunm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede piramit şeklinde bir nesne bulunmamaktadır."
+      }
+    },
+    {
+      "id": 43,
+      "command": "Yeşil nesneyi 2 birim yukarı kaldır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "sphere",
+            "pos": [
+              0.0,
+              2.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "command": "Cismi 2 birim aşağı indir",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['hangi', 'küp'])",
+      "matched_keywords": [
+        "hangi",
+        "küp"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi cismi aşağı indirmek istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunmaktadır."
+      }
+    },
+    {
+      "id": 45,
+      "command": "Kırmızı elmayı masaya koy",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['elma', 'masa', 'bulunm'])",
+      "matched_keywords": [
+        "elma",
+        "masa",
+        "bulunm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede kırmızı elma veya masa bulunmamaktadır."
+      }
+    },
+    {
+      "id": 46,
+      "command": "Sarı nesneyi 3 birim sola kaydır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cylinder",
+            "pos": [
+              -3.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 47,
+      "command": "Şu küpü biraz oynat",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['kırmızı', 'mavi', 'hangi', 'yön'])",
+      "matched_keywords": [
+        "kırmızı",
+        "mavi",
+        "hangi",
+        "yön"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Sahnede kırmızı ve mavi olmak üzere iki küp var. Hangi küpü ve hangi yöne hareket ettirmek istiyorsunuz?"
+      }
+    },
+    {
+      "id": 48,
+      "command": "Robotu çalıştır",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['robot', 'bulunm'])",
+      "matched_keywords": [
+        "robot",
+        "bulunm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede 'robot' adında bir nesne bulunmuyor ve bu eylem desteklenmiyor."
+      }
+    },
+    {
+      "id": 49,
+      "command": "Mavi küpü 2 birim yukarı kaldır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube_2",
+            "pos": [
+              0.0,
+              2.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "command": "Kırmızı küpü biraz hareket ettir",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['yön', 'hangi'])",
+      "matched_keywords": [
+        "yön",
+        "hangi"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Kırmızı küpü hangi yöne (sağa, sola, yukarı, aşağı, ileri veya geri) hareket ettirmemi istersiniz?"
+      }
+    },
+    {
+      "id": 51,
+      "command": "Sarı silindiri kürenin içine sok",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['içine', 'çarpış', 'fizik'])",
+      "matched_keywords": [
+        "içine",
+        "çarpış",
+        "fizik"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Katı nesnelerin birbirinin içine sokulması fizik kurallarına aykırıdır ve çarpışmaya neden olur."
+      }
+    },
+    {
+      "id": 52,
+      "command": "Kırmızı küpü dibe 2 birim indir",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube",
+            "pos": [
+              0.0,
+              -2.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 53,
+      "command": "Bunu 3 birim ileri götür",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['hangi', 'nesne', 'belirt'])",
+      "matched_keywords": [
+        "hangi",
+        "nesne",
+        "belirt"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi nesneyi 3 birim ileri taşımak istiyorsunuz? Sahnedeki kırmızı küp, mavi küp, yeşil küre veya sarı silindirden birini belirtebilirsiniz."
+      }
+    },
+    {
+      "id": 54,
+      "command": "Yeşil küpü 2 birim sağa kaydır",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['yeşil', 'küp', 'bulunm', 'kırmızı', 'mavi'])",
+      "matched_keywords": [
+        "yeşil",
+        "küp",
+        "bulunm",
+        "kırmızı",
+        "mavi"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede yeşil bir küp bulunmamaktadır. Yeşil nesne bir küredir, mevcut küpler ise kırmızı ve mavi renktedir."
+      }
+    },
+    {
+      "id": 55,
+      "command": "Silindiri 4 birim sağa kaydır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cylinder",
+            "pos": [
+              4.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 56,
+      "command": "Küpü 1 birim geri çek",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['kırmızı', 'mavi', 'hangi', 'iki'])",
+      "matched_keywords": [
+        "kırmızı",
+        "mavi",
+        "hangi",
+        "iki"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Sahnede kırmızı ve mavi olmak üzere iki adet küp bulunmaktadır. Hangisini hareket ettirmek istiyorsunuz?"
+      }
+    },
+    {
+      "id": 57,
+      "command": "Küpü hiç kıpırdatmadan 3 birim ileri götür",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['çelişki', 'kıpırdatmadan', 'mantık', 'uygulanamaz'])",
+      "matched_keywords": [
+        "çelişki",
+        "kıpırdatmadan",
+        "mantık",
+        "uygulanamaz"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Bir nesneyi hareket ettirmeden (hiç kıpırdatmadan) ileri götürmek mantıksal olarak çelişkilidir ve uygulanamaz."
+      }
+    },
+    {
+      "id": 58,
+      "command": "Kırmızı küpü 5 birim ileri ve 2 birim sağa götür",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube",
+            "pos": [
+              2.0,
+              0.0,
+              5.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 59,
+      "command": "Sahnede bir şeyi yukarı kaldır",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['hangi', 'nesne', 'küp', 'küre'])",
+      "matched_keywords": [
+        "hangi",
+        "nesne",
+        "küp",
+        "küre"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi nesneyi yukarı kaldırmak istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunuyor."
+      }
+    },
+    {
+      "id": 60,
+      "command": "Tüm sahneyi sil ve kapat",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['sil', 'kapat', 'desteklenm'])",
+      "matched_keywords": [
+        "sil",
+        "kapat",
+        "desteklenm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahneyi silme veya kapatma işlemi desteklenmemektedir; sistem yalnızca nesneleri hareket ettirme komutlarını destekler."
+      }
+    },
+    {
+      "id": 61,
+      "command": "Kırmızı küpü sakın oynatma ama mavi olanı 2 birim sağa kaydır",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube_2",
+            "pos": [
+              2.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 62,
+      "command": "Kürenin yanındaki küpü 2 birim yukarı kaldır",
+      "expected_type": "ask_user",
+      "actual_type": "action",
+      "decision_correct": false,
+      "slot_status": "❌ EKSİK İÇERİK (Beklenen: ['kırmızı', 'mavi', 'hangi', 'iki'])",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube",
+            "pos": [
+              0.0,
+              2.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 63,
+      "command": "Yeşil küreyi 2 birim sağa kaydır ve pembe fillerin hepsini sil",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['pembe', 'fil', 'sil', 'bulunm', 'desteklenm'])",
+      "matched_keywords": [
+        "pembe",
+        "fil",
+        "sil",
+        "bulunm",
+        "desteklenm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede pembe fil bulunmamaktadır ve nesne silme eylemi desteklenmemektedir."
+      }
+    },
+    {
+      "id": 64,
+      "command": "Orijinde duran nesneyi 3 birim ileri götür",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube",
+            "pos": [
+              0.0,
+              0.0,
+              3.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 65,
+      "command": "Şu yuvarlak zımbırtıyı azıcık öteye itiver",
+      "expected_type": "ask_user",
+      "actual_type": "action",
+      "decision_correct": false,
+      "slot_status": "❌ EKSİK İÇERİK (Beklenen: ['yön', 'nereye', 'hangi', 'öteye'])",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "sphere",
+            "pos": [
+              0.0,
+              0.0,
+              2.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 66,
+      "command": "Küpü sağa kaydırma, sola da kaydırma",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['eylem', 'hareket', 'komut'])",
+      "matched_keywords": [
+        "eylem",
+        "hareket",
+        "komut"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Komutta yapılması istenen geçerli bir hareket eylemi bulunmamaktadır."
+      }
+    },
+    {
+      "id": 67,
+      "command": "krmz kupu 3 brm sga kydr",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube",
+            "pos": [
+              3.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 68,
+      "command": "Mavi olmayan küpü biraz hareket ettir",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['yön', 'hangi'])",
+      "matched_keywords": [
+        "yön",
+        "hangi"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Kırmızı küpü hangi yöne (sağa, sola, yukarı, aşağı, ileri veya geri) hareket ettirmek istersiniz?"
+      }
+    },
+    {
+      "id": 69,
+      "command": "Silindiri kendi ekseni etrafında 360 derece döndürerek erit",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['erit', 'döndür', 'desteklenm'])",
+      "matched_keywords": [
+        "erit",
+        "döndür",
+        "desteklenm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Nesneleri eritme veya döndürme eylemleri sistem tarafından desteklenmemektedir; yalnızca taşıma (move) işlemi yapılabilir."
+      }
+    },
+    {
+      "id": 70,
+      "command": "Sarıyı sola al, kırmızıyı elleme",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cylinder",
+            "pos": [
+              -2.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 71,
+      "command": "bi şey yap işte",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['ne', 'hangi', 'nesne'])",
+      "matched_keywords": [
+        "ne",
+        "hangi",
+        "nesne"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Hangi nesneyi, hangi yönde hareket ettirmemi istersiniz?"
+      }
+    },
+    {
+      "id": 72,
+      "command": "Kırmızı küpü mavi küpün tam üzerine zıplat",
+      "expected_type": "reject_command",
+      "actual_type": "action",
+      "decision_correct": false,
+      "slot_status": "❌ EKSİK İÇERİK (Beklenen: ['zıplat', 'üzerine', 'fizik', 'desteklenm', 'çarpış', 'uygulanamaz'])",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube",
+            "pos": [
+              0.0,
+              2.0,
+              3.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 73,
+      "command": "Z koordinatı 3 olan nesneyi 2 birim aşağı indir",
+      "expected_type": "action",
+      "actual_type": "action",
+      "decision_correct": true,
+      "slot_status": "✅ TAM VEKTÖR & HEDEF EŞLEŞMESİ",
+      "matched_keywords": [],
+      "raw_output": {
+        "type": "action",
+        "actions": [
+          {
+            "action": "move",
+            "target": "cube_2",
+            "pos": [
+              0.0,
+              -2.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 74,
+      "command": "Küpü ya sağa ya sola kaydır",
+      "expected_type": "ask_user",
+      "actual_type": "ask_user",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ SORU (Anahtar: ['sağa', 'sola', 'hangi', 'küp'])",
+      "matched_keywords": [
+        "sağa",
+        "sola",
+        "hangi",
+        "küp"
+      ],
+      "raw_output": {
+        "type": "ask_user",
+        "question": "Sahnede kırmızı ve mavi olmak üzere iki küp bulunuyor. Hangi küpü ve hangi yöne (sağa mı sola mı) hareket ettirmek istiyorsunuz?"
+      }
+    },
+    {
+      "id": 75,
+      "command": "Sahnede olmayan masayı 2 birim sola it",
+      "expected_type": "reject_command",
+      "actual_type": "reject_command",
+      "decision_correct": true,
+      "slot_status": "✅ GEÇERLİ GEREKÇE (Anahtar: ['masa', 'bulunm'])",
+      "matched_keywords": [
+        "masa",
+        "bulunm"
+      ],
+      "raw_output": {
+        "type": "reject_command",
+        "reason": "Sahnede 'masa' adında bir nesne bulunmamaktadır."
+      }
+    }
+  ]
+}

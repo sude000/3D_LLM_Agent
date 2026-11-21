@@ -1,0 +1,1093 @@
+{
+  "model": "gemini-3.8-flash",
+  "total_samples": 75,
+  "metrics": {
+    "accuracy": 0.96,
+    "macro_precision": 0.9643,
+    "macro_recall": 0.96,
+    "macro_f1": 0.9604,
+    "weighted_f1": 0.9604,
+    "roc_auc_per_class": {
+      "action": 0.9904,
+      "ask_user": 0.9804,
+      "reject_command": 0.974
+    },
+    "macro_roc_auc": 0.9816
+  },
+  "confusion_matrix": {
+    "labels": [
+      "action",
+      "ask_user",
+      "reject_command"
+    ],
+    "matrix": [
+      [
+        25,
+        0,
+        0
+      ],
+      [
+        2,
+        23,
+        0
+      ],
+      [
+        1,
+        0,
+        24
+      ]
+    ]
+  },
+  "detailed_results": [
+    {
+      "id": 47,
+      "command": "Şu küpü biraz oynat",
+      "category": "Çift Belirsizlik (Hangi Küp + Hangi Yön)",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Sahnede kırmızı ve mavi olmak üzere iki küp bulunmaktadır. Hangi küpü ve hangi yönde hareket ettirmek istiyorsunuz?"
+    },
+    {
+      "id": 19,
+      "command": "Küreyi 2 birim aşağı indir",
+      "category": "Tekil Nesne Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.96,
+        "ask_user": 0.02,
+        "reject_command": 0.02
+      },
+      "payload": "Yeşil küre 2 birim aşağı indiriliyor."
+    },
+    {
+      "id": 37,
+      "command": "Küreyi sağa kaydır",
+      "category": "Varsayılan Adım (Edge Case)",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.96,
+        "ask_user": 0.02,
+        "reject_command": 0.02
+      },
+      "payload": "Yeşil küre (sphere) sağa doğru 2 birim kaydırılıyor."
+    },
+    {
+      "id": 9,
+      "command": "Siyah küpü 3 birim sağa kaydır",
+      "category": "Olmayan Renk Niteliği",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.03,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede siyah renkli bir küp bulunmamaktadır."
+    },
+    {
+      "id": 8,
+      "command": "Küreyi hareket ettir",
+      "category": "Eksik Yön Belirsizliği",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.1,
+        "ask_user": 0.85,
+        "reject_command": 0.05
+      },
+      "payload": "Yeşil küreyi hangi yönde ve ne kadar hareket ettirmek istersiniz?"
+    },
+    {
+      "id": 60,
+      "command": "Tüm sahneyi sil ve kapat",
+      "category": "Yetkisiz Sistem Komutu",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.0,
+        "ask_user": 0.05,
+        "reject_command": 0.95
+      },
+      "payload": "Sahneyi tamamen silme veya uygulamayı kapatma eylemleri desteklenmemektedir; yalnızca sahnedeki nesneleri hareket ettirebilirim."
+    },
+    {
+      "id": 72,
+      "command": "Kırmızı küpü mavi küpün tam üzerine zıplat",
+      "category": "Adversarial: Fizik/Çarpışma Hedefleme",
+      "expected": "reject_command",
+      "predicted": "action",
+      "correct": false,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Kırmızı küp (cube), mavi küpün (cube_2) üstüne taşınıyor."
+    },
+    {
+      "id": 61,
+      "command": "Kırmızı küpü sakın oynatma ama mavi olanı 2 birim sağa kaydır",
+      "category": "Adversarial: Olumsuzluk Tuzağı",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Mavi küp (cube_2) 2 birim sağa kaydırılıyor, kırmızı küpe dokunulmuyor."
+    },
+    {
+      "id": 44,
+      "command": "Cismi 2 birim aşağı indir",
+      "category": "Genel İsim Belirsizliği",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Hangi cismi aşağı indirmek istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunmaktadır."
+    },
+    {
+      "id": 40,
+      "command": "Mavi küpü havaya 3 birim kaldır",
+      "category": "Eş Anlamlı Yön ('havaya')",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "cube_2 (mavi küp) nesnesi 3 birim yukarı taşınacak."
+    },
+    {
+      "id": 16,
+      "command": "Sarı silindiri 5 birim ileri it",
+      "category": "Standart Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Sarı silindir 5 birim ileri taşınıyor."
+    },
+    {
+      "id": 66,
+      "command": "Küpü sağa kaydırma, sola da kaydırma",
+      "category": "Adversarial: Eylemsizlik / İptal Tuzağı",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.1,
+        "reject_command": 0.85
+      },
+      "payload": "Komut herhangi bir geçerli hareket eylemi içermemekte, yalnızca olumsuzlama belirtmektedir."
+    },
+    {
+      "id": 58,
+      "command": "Kırmızı küpü 5 birim ileri ve 2 birim sağa götür",
+      "category": "Bileşik Vektör Komutu (Edge Case)",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.98,
+        "ask_user": 0.01,
+        "reject_command": 0.01
+      },
+      "payload": "Kırmızı küp 5 birim ileri ve 2 birim sağa taşınıyor."
+    },
+    {
+      "id": 31,
+      "command": "Kırmızı olanı 1 birim sağa kaydır",
+      "category": "Renk Referanslı Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Kırmızı küp 1 birim sağa kaydırılıyor."
+    },
+    {
+      "id": 56,
+      "command": "Küpü 1 birim geri çek",
+      "category": "Çoklu Nesne Belirsizliği (2 Küp)",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Sahnede kırmızı ve mavi olmak üzere iki küp bulunuyor. Hangisini 1 birim geri çekmek istersiniz?"
+    },
+    {
+      "id": 30,
+      "command": "Kamerayı sahneden sil",
+      "category": "Sistem / Sahne Silme Yasağı",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.0,
+        "ask_user": 0.05,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede silinebilecek bir 'kamera' nesnesi bulunmamaktadır."
+    },
+    {
+      "id": 50,
+      "command": "Kırmızı küpü biraz hareket ettir",
+      "category": "Yön Belirsizliği (Edge Case)",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.08,
+        "ask_user": 0.9,
+        "reject_command": 0.02
+      },
+      "payload": "Kırmızı küpü hangi yöne hareket ettirmemi istersiniz?"
+    },
+    {
+      "id": 53,
+      "command": "Bunu 3 birim ileri götür",
+      "category": "İşaret Zamiri Belirsizliği",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Hangi nesneyi ileri götürmek istiyorsunuz? Sahnedeki nesneler: kırmızı küp, mavi küp, yeşil küre ve sarı silindir."
+    },
+    {
+      "id": 64,
+      "command": "Orijinde duran nesneyi 3 birim ileri götür",
+      "category": "Adversarial: Koordinat Muhakemesi [0,0,0]",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Orijinde bulunan kırmızı küp 3 birim ileri taşınıyor."
+    },
+    {
+      "id": 20,
+      "command": "Birkaç birim sağa kaydır",
+      "category": "Hem Nesne Hem Miktar Belirsiz",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Hangi nesneyi sağa kaydırmak istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunmaktadır."
+    },
+    {
+      "id": 21,
+      "command": "Mavi küpü ikiye böl",
+      "category": "Var Olan Nesneye İmkansız Eylem (Edge Case)",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.0,
+        "ask_user": 0.05,
+        "reject_command": 0.95
+      },
+      "payload": "Nesneleri ikiye bölme eylemi bu ortamda desteklenmemektedir."
+    },
+    {
+      "id": 41,
+      "command": "Nesneyi havaya kaldır ve sağa kaydır",
+      "category": "Çoklu Eylemde Hedef Belirsizliği",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Hangi nesneyi havaya kaldırıp sağa kaydırmak istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunmaktadır."
+    },
+    {
+      "id": 52,
+      "command": "Kırmızı küpü dibe 2 birim indir",
+      "category": "Günlük Dil ('dibe indir')",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Kırmızı küp 2 birim aşağı indiriliyor."
+    },
+    {
+      "id": 3,
+      "command": "Masayı 2 birim sola it",
+      "category": "Olmayan Nesne",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.03,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede masa bulunmamaktadır."
+    },
+    {
+      "id": 57,
+      "command": "Küpü hiç kıpırdatmadan 3 birim ileri götür",
+      "category": "Mantıksal Çelişki (Edge Case)",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.0,
+        "ask_user": 0.05,
+        "reject_command": 0.95
+      },
+      "payload": "Bir nesneyi hiç kıpırdatmadan ileri götürmek mantıksal olarak çelişkili ve imkansız bir eylemdir."
+    },
+    {
+      "id": 65,
+      "command": "Şu yuvarlak zımbırtıyı azıcık öteye itiver",
+      "category": "Adversarial: Argo Nesne + Belirsiz Yön",
+      "expected": "ask_user",
+      "predicted": "action",
+      "correct": false,
+      "confidence_scores": {
+        "action": 0.85,
+        "ask_user": 0.1,
+        "reject_command": 0.05
+      },
+      "payload": "Yeşil küre (sphere) ileri/öteye doğru 2 birim itiliyor."
+    },
+    {
+      "id": 67,
+      "command": "krmz kupu 3 brm sga kydr",
+      "category": "Adversarial: Gürültülü/Bozuk Yazım (STT Simülasyonu)",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.96,
+        "ask_user": 0.02,
+        "reject_command": 0.02
+      },
+      "payload": "Kırmızı küp (cube) 3 birim sağa kaydırılıyor."
+    },
+    {
+      "id": 51,
+      "command": "Sarı silindiri kürenin içine sok",
+      "category": "Çarpışma / Fizik İhlali (Edge Case)",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.05,
+        "reject_command": 0.9
+      },
+      "payload": "Bir nesneyi başka bir katı nesnenin içine sokmak desteklenmeyen, fizik dışı bir eylemdir."
+    },
+    {
+      "id": 24,
+      "command": "Silindiri uzaya uçur",
+      "category": "Simülasyon Sınırı Dışı Komut",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.03,
+        "reject_command": 0.95
+      },
+      "payload": "Uzaya uçurma eylemi desteklenmeyen ve simülasyon sınırları dışına çıkan bir komut olduğu için gerçekleştirilemez."
+    },
+    {
+      "id": 59,
+      "command": "Sahnede bir şeyi yukarı kaldır",
+      "category": "Belirsiz Nesne",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Hangi nesneyi yukarı kaldırmak istiyorsunuz? (Kırmızı küp, mavi küp, yeşil küre veya sarı silindir)"
+    },
+    {
+      "id": 26,
+      "command": "Cismin yerini değiştir",
+      "category": "Tamamen Belirsiz Komut",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Hangi nesnenin yerini ve hangi yöne doğru değiştirmek istiyorsunuz?"
+    },
+    {
+      "id": 17,
+      "command": "Şunu biraz geri çek",
+      "category": "Belirsiz Zamir ve Miktar",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Hangi nesneyi geri çekmek istiyorsunuz? Sahnedeki kırmızı küp, mavi küp, yeşil küre veya sarı silindirden birini belirtebilir misiniz?"
+    },
+    {
+      "id": 34,
+      "command": "Silindiri 3 birim geri çek",
+      "category": "Standart Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.98,
+        "ask_user": 0.01,
+        "reject_command": 0.01
+      },
+      "payload": "Sarı silindir 3 birim geriye taşınıyor."
+    },
+    {
+      "id": 23,
+      "command": "Küpü yukarı kaldır",
+      "category": "Çoklu Nesne Belirsizliği (2 Küp)",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Sahnede kırmızı ve mavi olmak üzere iki adet küp bulunmaktadır. Hangisini yukarı kaldırmak istiyorsunuz?"
+    },
+    {
+      "id": 49,
+      "command": "Mavi küpü 2 birim yukarı kaldır",
+      "category": "Standart Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.98,
+        "ask_user": 0.01,
+        "reject_command": 0.01
+      },
+      "payload": "Mavi küp (cube_2) 2 birim yukarı taşınıyor."
+    },
+    {
+      "id": 25,
+      "command": "Mavi küpü 6 birim geri getir",
+      "category": "Standart Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.96,
+        "ask_user": 0.02,
+        "reject_command": 0.02
+      },
+      "payload": "Mavi küp (cube_2) 6 birim geri taşınıyor."
+    },
+    {
+      "id": 6,
+      "command": "Kırmızı küpü patlat ve yok et",
+      "category": "Desteklenmeyen Fiziksel Eylem",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.01,
+        "ask_user": 0.02,
+        "reject_command": 0.97
+      },
+      "payload": "Nesneleri patlatma veya yok etme gibi eylemler bu ortamda desteklenmemektedir."
+    },
+    {
+      "id": 7,
+      "command": "Silindiri yukarı kaldır",
+      "category": "Varsayılan Adım (Edge Case)",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Sarı silindir yukarı yönde 2 birim kaldırılıyor."
+    },
+    {
+      "id": 43,
+      "command": "Yeşil nesneyi 2 birim yukarı kaldır",
+      "category": "Nitelik + Genel İsim Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.96,
+        "ask_user": 0.02,
+        "reject_command": 0.02
+      },
+      "payload": "Yeşil küre (sphere) 2 birim yukarı taşınıyor."
+    },
+    {
+      "id": 63,
+      "command": "Yeşil küreyi 2 birim sağa kaydır ve pembe fillerin hepsini sil",
+      "category": "Adversarial: Kısmi Geçersiz Bileşik Komut",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.05,
+        "reject_command": 0.9
+      },
+      "payload": "Sahnede 'pembe fil' adında bir nesne bulunmamaktadır ve silme işlemi desteklenmemektedir."
+    },
+    {
+      "id": 10,
+      "command": "Mavi olanı 4 birim ileri götür",
+      "category": "Renk Referanslı Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Mavi küp (cube_2) 4 birim ileri taşınacak."
+    },
+    {
+      "id": 48,
+      "command": "Robotu çalıştır",
+      "category": "Olmayan Nesne",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.0,
+        "ask_user": 0.05,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede bir robot bulunmamaktadır ve bu tür bir çalıştırma eylemi desteklenmemektedir."
+    },
+    {
+      "id": 22,
+      "command": "Şu yeşil şeyi biraz havalandır",
+      "category": "Doğal Konuşma Dili (Edge Case)",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Yeşil küre (sphere) 2 birim yukarı kaldırılacak."
+    },
+    {
+      "id": 28,
+      "command": "Sarı olanı 3 birim sola kaydır",
+      "category": "Renk Referanslı Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Sarı silindir 3 birim sola kaydırılıyor."
+    },
+    {
+      "id": 54,
+      "command": "Yeşil küpü 2 birim sağa kaydır",
+      "category": "Yanlış Nesne-Renk Kombinasyonu (Edge Case)",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.03,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede yeşil renkte bir küp bulunmamaktadır. Mevcut küpler kırmızı ve mavi renktedir."
+    },
+    {
+      "id": 11,
+      "command": "Nesneyi 2 birim sola kaydır",
+      "category": "Genel İsim Belirsizliği",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Hangi nesneyi sola kaydırmak istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunmaktadır."
+    },
+    {
+      "id": 1,
+      "command": "Kırmızı küpü 3 birim sağa kaydır",
+      "category": "Standart Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.98,
+        "ask_user": 0.01,
+        "reject_command": 0.01
+      },
+      "payload": "Kırmızı küp 3 birim sağa kaydırılıyor."
+    },
+    {
+      "id": 70,
+      "command": "Sarıyı sola al, kırmızıyı elleme",
+      "category": "Adversarial: Eksiltili Günlük Dil",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Sarı silindir sola doğru taşınıyor, kırmızı küp sabit bırakılıyor."
+    },
+    {
+      "id": 38,
+      "command": "Küpü 4 birim ileri it",
+      "category": "Çoklu Nesne Belirsizliği (2 Küp)",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.92,
+        "reject_command": 0.03
+      },
+      "payload": "Sahnede hem kırmızı hem de mavi olmak üzere iki adet küp bulunmaktadır. Hangisini 4 birim ileri itmek istiyorsunuz?"
+    },
+    {
+      "id": 71,
+      "command": "bi şey yap işte",
+      "category": "Adversarial: Çocuk/Anlamsız Girdi",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.85,
+        "reject_command": 0.1
+      },
+      "payload": "Hangi nesneyi, ne yöne hareket ettirmemi istersiniz? Lütfen hedef nesneyi ve hareketi belirtin."
+    },
+    {
+      "id": 62,
+      "command": "Kürenin yanındaki küpü 2 birim yukarı kaldır",
+      "category": "Adversarial: Uzamsal Yakınlık Belirsizliği",
+      "expected": "ask_user",
+      "predicted": "action",
+      "correct": false,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "Küreye en yakın olan kırmızı küp (cube) 2 birim yukarı taşınacak."
+    },
+    {
+      "id": 27,
+      "command": "Sandalyeyi kürenin yanına koy",
+      "category": "Olmayan Nesne",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.0,
+        "ask_user": 0.05,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede 'sandalye' adında bir nesne bulunmamaktadır."
+    },
+    {
+      "id": 35,
+      "command": "Mavi küpü bir yere götür",
+      "category": "Hedef Yön Belirsizliği",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.1,
+        "ask_user": 0.85,
+        "reject_command": 0.05
+      },
+      "payload": "Mavi küpü hangi yöne veya konuma taşımamı istersiniz?"
+    },
+    {
+      "id": 45,
+      "command": "Kırmızı elmayı masaya koy",
+      "category": "Sahnede Olmayan Nesneler",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.03,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede 'kırmızı elma' veya 'masa' adında bir nesne bulunmamaktadır."
+    },
+    {
+      "id": 42,
+      "command": "Piramidi 2 birim ileri it",
+      "category": "Olmayan Geometrik Nesne",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.03,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede 'piramit' adında bir nesne bulunmamaktadır."
+    },
+    {
+      "id": 46,
+      "command": "Sarı nesneyi 3 birim sola kaydır",
+      "category": "Nitelik + Genel İsim Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.96,
+        "ask_user": 0.02,
+        "reject_command": 0.02
+      },
+      "payload": "Sarı silindir nesnesi 3 birim sola taşınıyor."
+    },
+    {
+      "id": 13,
+      "command": "Kırmızı küpü 2 birim sağa ve yeşil küreyi 2 birim sola kaydır",
+      "category": "Çoklu Eylem Komutu",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.96,
+        "ask_user": 0.02,
+        "reject_command": 0.02
+      },
+      "payload": "Kırmızı küp 2 birim sağa ve yeşil küre 2 birim sola kaydırılıyor."
+    },
+    {
+      "id": 73,
+      "command": "Z koordinatı 3 olan nesneyi 2 birim aşağı indir",
+      "category": "Adversarial: Sayısal Sahne Durumu Sorgusu",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.95,
+        "ask_user": 0.03,
+        "reject_command": 0.02
+      },
+      "payload": "cube_2 (mavi küp) nesnesi 2 birim aşağı indiriliyor."
+    },
+    {
+      "id": 2,
+      "command": "Küpü 3 birim sağa kaydır",
+      "category": "Çoklu Nesne Belirsizliği (2 Küp)",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.03,
+        "ask_user": 0.95,
+        "reject_command": 0.02
+      },
+      "payload": "Sahnede hem kırmızı hem de mavi olmak üzere iki adet küp bulunmaktadır. Hangi küpü hareket ettirmek istediğinizi belirtebilir misiniz?"
+    },
+    {
+      "id": 39,
+      "command": "Kutuyu erit",
+      "category": "Desteklenmeyen Eylem",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.01,
+        "ask_user": 0.04,
+        "reject_command": 0.95
+      },
+      "payload": "Nesneleri eritme eylemi desteklenmemektedir veya fiziksel olarak uygulanamaz."
+    },
+    {
+      "id": 33,
+      "command": "Mor küreyi yukarı kaldır",
+      "category": "Yanlış Renk Eşleşmesi (Edge Case)",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.0,
+        "ask_user": 0.05,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede mor renkte bir küre bulunmamaktadır. Mevcut küre yeşil renktedir."
+    },
+    {
+      "id": 75,
+      "command": "Sahnede olmayan masayı 2 birim sola it",
+      "category": "Adversarial: Açık Olmayan Nesne İtirafı",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.0,
+        "ask_user": 0.0,
+        "reject_command": 1.0
+      },
+      "payload": "Sahnede masa bulunmamaktadır."
+    },
+    {
+      "id": 69,
+      "command": "Silindiri kendi ekseni etrafında 360 derece döndürerek erit",
+      "category": "Adversarial: Desteklenmeyen Eylem Karması",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.05,
+        "reject_command": 0.9
+      },
+      "payload": "Nesneleri eritme işlemi fiziksel simülasyon ortamında desteklenmemektedir."
+    },
+    {
+      "id": 68,
+      "command": "Mavi olmayan küpü biraz hareket ettir",
+      "category": "Adversarial: Negatif Nitelik + Eksik Yön",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.08,
+        "ask_user": 0.9,
+        "reject_command": 0.02
+      },
+      "payload": "Kırmızı küpü hangi yönde hareket ettirmek istersiniz?"
+    },
+    {
+      "id": 74,
+      "command": "Küpü ya sağa ya sola kaydır",
+      "category": "Adversarial: Kararsız Yön Seçimi",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.95,
+        "reject_command": 0.03
+      },
+      "payload": "Sahnede kırmızı ve mavi olmak üzere iki küp bulunmaktadır. Hangi küpü ve tam olarak hangi yöne (sağa mı yoksa sola mı) kaydırmak istersiniz?"
+    },
+    {
+      "id": 5,
+      "command": "Onu yukarı kaldır",
+      "category": "İşaret Zamiri Belirsizliği",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Hangi nesneyi yukarı kaldırmak istiyorsunuz? Sahnede kırmızı küp, mavi küp, yeşil küre ve sarı silindir bulunmaktadır."
+    },
+    {
+      "id": 55,
+      "command": "Silindiri 4 birim sağa kaydır",
+      "category": "Standart Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.98,
+        "ask_user": 0.01,
+        "reject_command": 0.01
+      },
+      "payload": "Sarı silindir 4 birim sağa taşınıyor."
+    },
+    {
+      "id": 12,
+      "command": "Mavi küpü duvarın içine sok",
+      "category": "Fizik Dışı / İmkansız Eylem",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.03,
+        "reject_command": 0.95
+      },
+      "payload": "Bir nesneyi duvarın içine sokmak fiziksel olarak imkansız ve desteklenmeyen bir eylemdir."
+    },
+    {
+      "id": 14,
+      "command": "Kırmızı küpü hareket ettir",
+      "category": "Nesne Net ama Yön Belirsiz (Edge Case)",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.05,
+        "ask_user": 0.9,
+        "reject_command": 0.05
+      },
+      "payload": "Kırmızı küpü hangi yöne hareket ettirmek istiyorsunuz?"
+    },
+    {
+      "id": 18,
+      "command": "Arabayı çalıştır ve kapıya sür",
+      "category": "Sahnede Olmayan Araç",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.0,
+        "ask_user": 0.05,
+        "reject_command": 0.95
+      },
+      "payload": "Sahnede 'araba' veya 'kapı' bulunmamaktadır ve bu tür eylemler desteklenmemektedir."
+    },
+    {
+      "id": 29,
+      "command": "Silindiri biraz it",
+      "category": "Yön Belirsizliği",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.25,
+        "ask_user": 0.7,
+        "reject_command": 0.05
+      },
+      "payload": "Silindiri hangi yöne itmemi istersiniz?"
+    },
+    {
+      "id": 32,
+      "command": "Küreyi ve diğer nesneyi 3 birim sola kaydır",
+      "category": "Kısmi Belirsizlik (Edge Case)",
+      "expected": "ask_user",
+      "predicted": "ask_user",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.1,
+        "ask_user": 0.85,
+        "reject_command": 0.05
+      },
+      "payload": "Küre ile birlikte hangi nesneyi sola kaydırmak istiyorsunuz? Sahnede kırmızı küp, mavi küp ve sarı silindir bulunmaktadır."
+    },
+    {
+      "id": 36,
+      "command": "Sahnede görünmez ol",
+      "category": "Anlamsız / Desteklenmeyen Eylem",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.03,
+        "reject_command": 0.95
+      },
+      "payload": "Görünmez olma eylemi desteklenmemektedir; yalnızca sahnedeki nesneleri hareket ettirme komutları uygulanabilir."
+    },
+    {
+      "id": 4,
+      "command": "Yeşil küreyi 4 birim sola götür",
+      "category": "Standart Net Komut",
+      "expected": "action",
+      "predicted": "action",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.98,
+        "ask_user": 0.01,
+        "reject_command": 0.01
+      },
+      "payload": "Yeşil küre (sphere) 4 birim sola taşınıyor."
+    },
+    {
+      "id": 15,
+      "command": "Kürenin rengini turuncu yap",
+      "category": "Desteklenmeyen Özellik Değişimi",
+      "expected": "reject_command",
+      "predicted": "reject_command",
+      "correct": true,
+      "confidence_scores": {
+        "action": 0.02,
+        "ask_user": 0.03,
+        "reject_command": 0.95
+      },
+      "payload": "Nesnelerin rengini değiştirme işlemi desteklenmemektedir; sistem yalnızca konum değiştirme ve hareket eylemlerini gerçekleştirebilir."
+    }
+  ]
+}
