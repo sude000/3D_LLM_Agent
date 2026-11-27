@@ -17,10 +17,18 @@
 *.suo
 *.user
 
-# Python cache files
+# Python cache & virtual environments
 __pycache__/
 *.pyc
 *.pyo
 .env
 venv/
+.venv/
 env/
+
+# Audio recordings & temporary STT files
+*.wav
+*.mp3
+*.ogg
+*.flac
+*.m4a
